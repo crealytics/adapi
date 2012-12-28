@@ -13,6 +13,7 @@ module Adapi
     context "existing ad group" do
       setup do 
         @campaign_id = create_bare_campaign! 
+        @campaign = Adapi::Campaign.find(@campaign_id)
 
         @ad_group_data = {
           :campaign_id => @campaign_id,
@@ -36,9 +37,14 @@ module Adapi
         assert_equal @ad_group_data[:name], @ad_group.name        
       end      
 
+      should "contain the campaign name" do
+        assert_not_nil @ad_group
+
+        assert_equal @campaign.name, @ad_group.campaign_name
+      end
+
       should "be found using campaign name instead of campaign id" do
-        campaign = Adapi::Campaign.find(@campaign_id)
-        ad_group = Adapi::AdGroup.find(:first, :id => @ad_group.id, :campaign_name => campaign.name)
+        ad_group = Adapi::AdGroup.find(:first, :id => @ad_group.id, :campaign_name => @campaign.name)
 
         assert_not_nil ad_group
         assert_equal @ad_group_data[:name], ad_group.name

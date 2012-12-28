@@ -7,7 +7,7 @@
 module Adapi
   class AdGroup < Api
   
-    ATTRIBUTES = [ :id, :campaign_id, :name, :status, :bids, :keywords, :ads ]
+    ATTRIBUTES = [ :id, :campaign_id, :campaign_name, :name, :status, :bids, :keywords, :ads ]
 
     attr_accessor *ATTRIBUTES 
 
@@ -193,7 +193,7 @@ module Adapi
         end
       end.compact
 
-      select_fields = %w{ Id CampaignId Name Status } 
+      select_fields = %w{ Id CampaignId CampaignName Name Status }
       # add Bids atributes
       select_fields += %w{ EnhancedCpcEnabled ProxyKeywordMaxCpc 
         KeywordMaxCpc KeywordContentMaxCpc }
