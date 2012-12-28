@@ -36,6 +36,14 @@ module Adapi
         assert_equal @ad_group_data[:name], @ad_group.name        
       end      
 
+      should "be found using campaign name instead of campaign id" do
+        campaign = Adapi::Campaign.find(@campaign_id)
+        ad_group = Adapi::AdGroup.find(:first, :id => @ad_group.id, :campaign_name => campaign.name)
+
+        assert_not_nil ad_group
+        assert_equal @ad_group_data[:name], ad_group.name
+      end
+
       should "not be found after deletion" do
         @ad_group.delete
 

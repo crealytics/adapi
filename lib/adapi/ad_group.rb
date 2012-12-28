@@ -185,9 +185,9 @@ module Adapi
       # by default, exclude ad_groups with status DELETED
       params[:status] ||= %w{ ENABLED PAUSED }
 
-      raise "Campaign ID is required" unless params[:campaign_id]
+      raise "Campaign ID/name is required" unless params[:campaign_id] or params[:campaign_name]
       
-      predicates = [ :campaign_id, :id, :name, :status ].map do |param_name|
+      predicates = [ :campaign_id, :campaign_name, :id, :name, :status ].map do |param_name|
         if params[param_name].present?
           {:field => param_name.to_s.camelcase, :operator => 'IN', :values => Array( params[param_name] ) }
         end
