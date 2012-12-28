@@ -347,7 +347,7 @@ module Adapi
       params.symbolize_keys!
       first_only = (amount.to_sym == :first)
 
-      predicates = [ :id ].map do |param_name|
+      predicates = [ :id, :name ].map do |param_name|
         if params[param_name]
           # convert to array
           value = Array.try_convert(params[param_name]) ? params_param_name : [params[param_name]]

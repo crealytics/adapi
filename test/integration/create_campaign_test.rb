@@ -51,6 +51,13 @@ module Adapi
         assert_equal "City", location[:display_type]
       end      
 
+      should "be found by its name" do
+        campaign = Adapi::Campaign.find(:first, :name => @campaign_data[:name])
+
+        assert_equal @campaign.id, campaign.id
+        assert_equal @campaign_data[:name], campaign.name
+      end
+
       should "still be found after deletion" do
         @campaign.delete
 
