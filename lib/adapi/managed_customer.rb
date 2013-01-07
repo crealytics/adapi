@@ -27,10 +27,6 @@ module Adapi
 
       params[:service_name] = :ManagedCustomerService
       
-      # this model uses the latest version of AdWords API. 
-      # the rest of the model still use v201109_1 
-      params[:api_version] = :v201206
-
       @xsi_type = 'ManagedCustomer'
 
       ATTRIBUTES.each do |param_name|
